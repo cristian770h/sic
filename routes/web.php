@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Student\StudentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/error', function () {
+    return view('error');
+})->name('error');
+Route::resource('students', StudentController::class)
+    ->middleware(['auth', 'verified']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
