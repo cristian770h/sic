@@ -10,12 +10,17 @@ use function Laravel\Prompts\alert;
 
 class StudentController extends Controller
 {
+
+    
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        
         $alumno = students::all();
+        $this->middleware('auth')->only(['index','create','update']);
         return view('students.index',[ 'alumno'=> $alumno]);
     }
 
@@ -24,6 +29,7 @@ class StudentController extends Controller
      */
     public function create()
     {
+        
         return view('students.create');
     }
 
@@ -33,7 +39,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_student' => 'required|unique:students,id_student|max:10|min:6',
+            'id_student' => 'required|unique:students|max:10|min:6',
             'name_student' => 'required|max:20|min:3|alpha|regex:/^[\pL\s\-]+$/u',
             'last_name_student' => 'required|max:50|min:3|regex:/^[\pL\s\-]+$/u',
             'birthday' => 'required|date|before:today|after:01/01/1900',
@@ -46,7 +52,7 @@ class StudentController extends Controller
         $alumno->birthday = $request->input('birthday');
         $alumno->descripcion = $request->input('descripcion');
         $alumno->save();
-        return alert('success', '¡Estudiante registrado con éxito!');
+        return alert('success ¡Estudiante registrado con éxito!');
     }
 
     /**
@@ -73,7 +79,7 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'id_student' => 'required|max:10|min:6|unique:students,id_student,'.$id,
+            'id_student' => 'required|max:10|min:6|unique:students,id_student,'.$id.'',
             'name_student' => 'required|max:20|min:3|alpha|regex:/^[\pL\s\-]+$/u',
             'last_name_student' => 'required|max:50|min:3|regex:/^[\pL\s\-]+$/u',
             'birthday' => 'required|date|before:today|after:01/01/1900',
@@ -86,7 +92,7 @@ class StudentController extends Controller
         $alumno->birthday = $request->input('birthday');
         $alumno->descripcion = $request->input('descripcion');
         $alumno->save();
-        return alert('success', '¡Estudiante registrado con éxito!');
+        return redirect('/students');
     }
 
     /**
@@ -96,6 +102,6 @@ class StudentController extends Controller
     {
         $alumno = students::find($id);
         $alumno->delete();
-        return redirect(   '/students');
+        return redirect(   '/alumno');
     }
 }

@@ -21,7 +21,7 @@
     </div>
     
 @endif
-        <form action="{{ url('students/.$student->id') }}" method="POST">
+        <form action="{{ route('alumno.update', $alumno->id) }}" method="POST">
             @method('PUT')
             @csrf
             <input type="text" name="name_student" placeholder="Nombre" value="{{ $alumno->name_student}}">
