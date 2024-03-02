@@ -19,8 +19,8 @@ class StudentController extends Controller
     public function index()
     {
         
-        $alumno = students::all();
-        $this->middleware('auth')->only(['index','create','update']);
+        //$alumno = students::all();
+        $alumno = students::paginate(10);    
         return view('students.index',[ 'alumno'=> $alumno]);
     }
 
@@ -58,9 +58,10 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(students $students)
+    public function show($id)
     {
-        //
+        $alumno = students::find($id);
+        return view('students.show', ['alumno' => $alumno]);
     }
 
     /**
@@ -92,7 +93,7 @@ class StudentController extends Controller
         $alumno->birthday = $request->input('birthday');
         $alumno->descripcion = $request->input('descripcion');
         $alumno->save();
-        return redirect('/students');
+        return redirect('/students')->with('notificacion', '¡Estudiante actualizado con éxito!');
     }
 
     /**
@@ -102,6 +103,6 @@ class StudentController extends Controller
     {
         $alumno = students::find($id);
         $alumno->delete();
-        return redirect(   '/alumno');
+        return redirect(   '/students');
     }
 }

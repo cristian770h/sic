@@ -12,11 +12,11 @@
 <body>
     <div class="flex">
         
-        <div class="bg-[#2f4050] min-h-screen p-5 pt-8">
+    <div class="bg-[#2f4050] h-screen p-5 pt-8 relative ">
             <div class="flex flex-col items-center">
                 
-                <img class='w-24 h-24' src="public/_3a94047e-0f48-4b98-a1b0-de9a362cf388-removebg-preview.png" alt="">
-                <h1 class="ml-2 text-[#9CB1C2] origin-left font-medium text-sm">SIC - Sistema de <br>Información
+            <img class='w-24 h-24' src="public/_3a94047e-0f48-4b98-a1b0-de9a362cf388-removebg-preview.png" alt="">
+                <h1 class="m l-2 text-[#9CB1C2] origin-left font-medium text-sm">SIC - Sistema de <br>Información
                     Calificaciones</br></h1>
 
 
@@ -69,9 +69,38 @@
 </svg>
 
                     </span>
-                    Elemento 4</li>
+                    Elemento 4</li>@if (Route::has('login'))
+                    <li class="text-[#9CB1C2] text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:text-white rounded-md font-medium">
+                    
+                
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="font-semibold text-green-600 hover:text-green-900 dark:text-geen-400 dark:hover:text-green focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                        @endif
+                    @endauth
+                
+                    
+                    </li> 
+                    @endif
             </ul>
+            
         </div>
+        <div class="bg-[#2f4050] w-full h-20 fixed">
+    <span class="justify-start font-medium text-2xl">
+        SIC | 
+    </span>
+    <span class="text-[#9CB1C2] font-medium text-sm ">
+        Sistema integral <br> de Calificaciones
+    </span>
+        </div>
+        <div class="relative">
+             <input type="search" class="block w-full rounded-md">
+        </div>
+       
     </div>
 </body>
 

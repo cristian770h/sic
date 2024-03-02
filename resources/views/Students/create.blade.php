@@ -21,7 +21,7 @@
     </div>
     
 @endif
-        <form action="{{ url('alumno') }}" method="POST">
+        <form action="{{ url('students') }}" method="POST">
             @csrf
             <input type="text" name="name_student" placeholder="Nombre" value="{{ old('name_student') }}">
             @error('name_student')

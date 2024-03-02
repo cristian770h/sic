@@ -21,21 +21,17 @@
     </div>
     
 @endif
-        <form action="{{ route('alumno.update', $alumno->id) }}" method="POST">
-            @method('PUT')
+        <form action="{{ route('students.update', $alumno->id) }}" method="POST">
             @csrf
+            @method('put')
             <input type="text" name="name_student" placeholder="Nombre" value="{{ $alumno->name_student}}">
-            @error('name_student')
-                <span style="color: red">{{ $message }}</span>
-            @enderror
             <input type="number" name="id_student" placeholder="Matricula" value="{{  $alumno->id_student }}">
             <input type="text" name="last_name_student" placeholder="Apellido estudiante"
                 value="{{  $alumno->last_name_student }}">
             <input type="date" name="birthday" placeholder="Fecha de nacimiento" value="{{  $alumno->birthday }}">
             <input type="text" name="descripcion" placeholder="descripcion" value="{{  $alumno->descripcion }}">
             <div>
-                <a href="{{ url('asda') }}">
-                    <button class="bg-gray-500  w-32 h-22 font-bold rounded-md hover:bg-blue-300">Regresar</button></a>
+                
                 <button type="submit"
                     class=" bg-blue-500 w-32 h-22 font-bold rounded-md hover:bg-blue-300">Actualizar</button>
             </div>
